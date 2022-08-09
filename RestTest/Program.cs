@@ -31,6 +31,14 @@
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            //HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, requestUri);
+            //httpRequestMessage.Content = content;
+            //httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue(
+            //    scheme: "Basic",
+            //    parameter: Convert.ToBase64String(encoding.GetBytes(userName + ":" + password))
+            //);
+
+
             var response = await client.PostAsJsonAsync("PF", data);
             response.EnsureSuccessStatusCode();
         }
