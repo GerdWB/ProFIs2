@@ -3,16 +3,22 @@
     using System;
     using Microsoft.Extensions.Logging;
     using Microsoft.Office.Interop.Word;
+    using Services;
 
     internal class WordEventProxy : IWordEventProxy
     {
         private readonly ILogger _logger;
+        private readonly IUploadService _uploadService;
         private Application _application;
 
-        public WordEventProxy(Application application, ILogger<WordEventProxy> logger)
+        public WordEventProxy(
+            Application application,
+            IUploadService uploadService,
+            ILogger<WordEventProxy> logger)
         {
             _application = application ?? throw new ArgumentNullException(nameof(application));
-            _logger = logger;
+            _uploadService = uploadService;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             ((ApplicationEvents4_Event)_application).Quit += AppOnQuit;
             _application.DocumentBeforeSave += OnSave;
@@ -35,7 +41,8 @@
 
             _logger.LogInformation("BeforeClose: It is an Profis document");
 
-            var a = Globals.GetProfiS2Data(document);
+            var profiS2WordData = Globals.GetProfiS2Data(document);
+            _uploadService.Upload(profiS2WordData, null);
         }
 
         private void OnSave(Document document, ref bool ui, ref bool cancel)

@@ -20,12 +20,12 @@
 
         private void CurrentDomain_FirstChanceException(object sender, FirstChanceExceptionEventArgs e)
         {
-            _logger.LogError(e.Exception, "First Chance Exception");
+            _logger.Error(e.Exception, "First Chance Exception");
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            _logger.LogError((Exception)e.ExceptionObject, "Unhandled Exception");
+            _logger.Error((Exception)e.ExceptionObject, "Unhandled Exception");
         }
     }
 }

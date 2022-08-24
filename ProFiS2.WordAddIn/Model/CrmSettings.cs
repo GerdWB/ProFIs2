@@ -5,14 +5,14 @@
 
     internal class CrmSettings
     {
-        public static readonly XName CatIdElementName = ProfiS2Data.Namespace + "CatId";
+        public static readonly XName CatIdElementName = ProfiS2WordData.Namespace + "CatId";
 
-        public static readonly XName DocKeyElementName = ProfiS2Data.Namespace + "DocKey";
-        public static readonly XName DocumentNameElementName = ProfiS2Data.Namespace + "DocumentName";
-        public static XName ElementName = ProfiS2Data.Namespace + "CrmSettings";
-        public static readonly XName InstIdElementName = ProfiS2Data.Namespace + "InstId";
-        public static readonly XName RestUrlElementName = ProfiS2Data.Namespace + "RestUrl";
-        public static readonly XName TypeIdElementName = ProfiS2Data.Namespace + "TypeId";
+        public static readonly XName DocKeyElementName = ProfiS2WordData.Namespace + "DocKey";
+        public static readonly XName DocumentNameElementName = ProfiS2WordData.Namespace + "DocumentName";
+        public static XName ElementName = ProfiS2WordData.Namespace + "CrmSettings";
+        public static readonly XName InstIdElementName = ProfiS2WordData.Namespace + "InstId";
+        public static readonly XName RestUrlElementName = ProfiS2WordData.Namespace + "RestUrl";
+        public static readonly XName TypeIdElementName = ProfiS2WordData.Namespace + "TypeId";
 
 
         private readonly XElement _settingsElement;

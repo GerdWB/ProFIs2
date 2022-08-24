@@ -1,26 +1,13 @@
 ﻿namespace ProFiS2.WordAddIn.Model
 {
-    using System;
-    using System.Xml.Linq;
-
-    internal class ProfiS2Data
+    public class ProFis2Data
     {
-        public static XNamespace Namespace = "http://schemas.profis2/sapupload";
-        public static XName ElementName = Namespace + "profis2";
-
-
-        public ProfiS2Data(XElement profiS2DataElement)
-        {
-            if (profiS2DataElement == null)
-            {
-                throw new ArgumentNullException(nameof(profiS2DataElement));
-            }
-
-            var Settings = new CrmSettings(profiS2DataElement.Element(CrmSettings.ElementName));
-            var Infos = new Info(profiS2DataElement.Element(Info.ElementName));
-        }
-
-        public CrmSettings Settings { get; }
-        public Info Infos { get; }
+        public string DocKey { get; set; }
+        public string InstId { get; set; }
+        public string TpyeId { get; set; }
+        public string CatId { get; set; }
+        public string DocumentName { get; set; }
+        public string Date { get; set; }
+        public byte[] Document { get; set; }
     }
 }

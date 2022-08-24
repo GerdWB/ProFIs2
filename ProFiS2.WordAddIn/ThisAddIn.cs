@@ -8,6 +8,7 @@ namespace ProFiS2.WordAddIn
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
+    using Services;
 
     public partial class ThisAddIn
     {
@@ -38,6 +39,8 @@ namespace ProFiS2.WordAddIn
             var services = new ServiceCollection();
             services.AddSingleton(Application);
             services.AddSingleton<IWordEventProxy, WordEventProxy>();
+            services.AddSingleton<IMessageService, MessageService>();
+            services.AddSingleton<IUploadService, UploadService>();
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
             ServiceProvider = services.BuildServiceProvider();
             ServiceProvider.GetService<IWordEventProxy>();

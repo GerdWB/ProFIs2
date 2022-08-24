@@ -6,13 +6,13 @@
 
     internal static partial class Globals
     {
-        public static ProfiS2Data GetProfiS2Data(Document document)
+        public static ProfiS2WordData GetProfiS2Data(Document document)
         {
             try
             {
-                var parts = document.CustomXMLParts.SelectByNamespace(ProfiS2Data.Namespace.NamespaceName);
+                var parts = document.CustomXMLParts.SelectByNamespace(ProfiS2WordData.Namespace.NamespaceName);
                 var customXml = XElement.Parse(parts[1].XML);
-                var profiS2Data = new ProfiS2Data(customXml);
+                var profiS2Data = new ProfiS2WordData(customXml);
                 return profiS2Data;
             }
             catch

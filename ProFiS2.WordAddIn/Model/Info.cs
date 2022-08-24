@@ -5,8 +5,8 @@
 
     internal class Info
     {
-        public static readonly XName DateElementName = ProfiS2Data.Namespace + "Date";
-        public static XName ElementName = ProfiS2Data.Namespace + "Info";
+        public static readonly XName DateElementName = ProfiS2WordData.Namespace + "Date";
+        public static XName ElementName = ProfiS2WordData.Namespace + "Info";
         private readonly XElement _infoElement;
 
         public Info(XElement infoElement) =>
