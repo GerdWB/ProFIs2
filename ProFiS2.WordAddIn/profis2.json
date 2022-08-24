@@ -1,0 +1,25 @@
+{
+  "User": {
+    "user": "Gerd",
+    "password": "123AbC"
+  },
+  "Serilog": {
+    "Using": [
+      "Serilog.Sinks.File"
+    ],
+    "MinimumLevel": "Debug",
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "%LOCALAPPDATA%/Profis2/log.text",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": 14
+        }
+      }
+    ],
+    "Properties": {
+      "Application": "Profis2"
+    }
+  }
+}

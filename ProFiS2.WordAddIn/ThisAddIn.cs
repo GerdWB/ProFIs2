@@ -3,13 +3,46 @@
 namespace ProFiS2.WordAddIn
 {
     using System;
+    using Configuration;
     using Events;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Serilog;
 
     public partial class ThisAddIn
     {
-        private void ConfigureServices()
+        private static void CreateLogger(IConfigurationRoot configurationRoot)
         {
-            var wordEventProxy = new WordEventProxy(Application);
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configurationRoot)
+                .CreateLogger();
+        }
+
+        private static IConfigurationRoot GetConfiguration()
+        {
+            var configuration = new ConfigurationBuilder();
+            configuration.AddJsonFile("profis2.json", false, false);
+            var configurationRoot = configuration.Build();
+            return configurationRoot;
+        }
+
+        public IServiceProvider ServiceProvider { get; set; }
+
+        private void ConfigureServices(IConfigurationRoot configurationRoot)
+        {
+            // ReSharper disable once ObjectCreationAsStatement
+            new GlobalExceptionHandling(Log.Logger, true);
+
+            var proFiS2Configuration = configurationRoot.Get<ProFiS2Configuration>();
+
+            var services = new ServiceCollection();
+            services.AddSingleton(Application);
+            services.AddSingleton<IWordEventProxy, WordEventProxy>();
+            services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
+            ServiceProvider = services.BuildServiceProvider();
+            ServiceProvider.GetService<IWordEventProxy>();
+
+            Log.Logger.Information("AddIn started and configured");
         }
 
         #region VSTO generated code
@@ -32,7 +65,10 @@ namespace ProFiS2.WordAddIn
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
-            ConfigureServices();
+            var configurationRoot = GetConfiguration();
+
+            CreateLogger(configurationRoot);
+            ConfigureServices(configurationRoot);
         }
     }
 }
