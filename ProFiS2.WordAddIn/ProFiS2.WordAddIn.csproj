@@ -169,6 +169,9 @@
     <Compile Include="Events\IWordEventProxy.cs" />
     <Compile Include="Events\WordEventProxy.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\TempFileCollection.cs" />
+    <Compile Include="Helper\WordHelper.cs" />
     <Compile Include="Model\ProFis2Data.cs" />
     <Compile Include="Model\CrmSettings.cs" />
     <Compile Include="Model\Info.cs" />
